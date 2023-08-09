@@ -23,7 +23,9 @@ class NetworkCaller {
   Future<NetworkResponse> gpostRequest(
       String url, Map<String, dynamic> body) async {
     try {
-      Response response = await post(Uri.parse(url), body: jsonEncode(body));
+      Response response = await post(Uri.parse(url), headers: {
+        'content-Type' : 'application/json'
+      }, body: jsonEncode(body));
       if (response.statusCode == 200) {
         return NetworkResponse(
             false, response.statusCode, jsonDecode(response.body));
